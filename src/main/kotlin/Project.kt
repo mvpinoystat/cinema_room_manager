@@ -1,10 +1,11 @@
 
 
 fun projectStart(){
-    println("Enter the number of rows:")
-    val nRows = readln().toInt()
-    println("Enter the number of seats in each row:")
-    val nCols = readln().toInt()
+
+    val dimension = askSeatingDimension()
+    val nRows = dimension[0]
+    val nCols = dimension[1]
+
     println()
     //x and y-axis of bought seat:
     val occupiedRow: MutableList<Int> = mutableListOf()
@@ -70,7 +71,34 @@ fun projectStart(){
 
 }
 
+fun askSeatingDimension():List<Int>{
+    var flag = true
+    var nRows = 0
+    var nCols = 0
+    while(flag){
+        println("Enter the number of rows:")
+        try{
+            nRows = readln().toInt()
+        }
+        catch (e:NumberFormatException){
+            println("Input only numbers.")
+            continue
+        }
 
+        println("Enter the number of seats in each row:")
+        try{
+            nCols = readln().toInt()
+        }
+        catch (e:NumberFormatException){
+            println("Input only numbers.")
+            continue
+        }
+        //if everything is fine:
+        flag = false
+    }
+
+   return listOf(nRows,nCols)
+}
 
 fun showMenu(): Int{
     println("1. Show the seats")
